@@ -83,7 +83,7 @@ examples, and change history before upgrading.
 No Azure credentials or external network are needed after dependencies have
 been downloaded.
 
-```powershell
+```bash
 go run ./cmd/order-demo domain
 go test ./...
 go vet ./...
@@ -113,7 +113,7 @@ export FOUNDRY_MODEL="<model-deployment-name>"
 Authenticate with any `DefaultAzureCredential` source available in your
 environment. For local development, Azure CLI authentication is one option:
 
-```powershell
+```bash
 az login
 ```
 
@@ -122,7 +122,7 @@ token and calls only the configured project endpoint.
 
 Start the controlled shipping server in terminal 1:
 
-```powershell
+```bash
 go run ./cmd/shipping-mcp --listen 127.0.0.1:8081
 ```
 
@@ -132,7 +132,7 @@ The server rejects non-loopback bind addresses.
 
 ### 1. Ordinary Go service
 
-```powershell
+```bash
 go run ./cmd/order-demo domain
 ```
 
@@ -151,9 +151,9 @@ fulfilment: blocked_waiting_for_stock
 `basic` exposes only `get_order`. Multiple positional prompts reuse one local
 Agent Framework session. Responses are streamed to the terminal.
 
-```powershell
-go run ./cmd/order-demo basic `
-  "Why hasn't order 58372 shipped?" `
+```bash
+go run ./cmd/order-demo basic \
+  "Why hasn't order 58372 shipped?" \
   "What did you learn from the order record?"
 ```
 
@@ -165,10 +165,10 @@ session owns complete conversational and tool-call history.
 
 With the shipping server still running:
 
-```powershell
-go run ./cmd/order-demo agent `
-  --shipping-endpoint http://127.0.0.1:8081 `
-  "Why hasn't order 58372 shipped, and what can we do about it?" `
+```bash
+go run ./cmd/order-demo agent \
+  --shipping-endpoint http://127.0.0.1:8081 \
+  "Why hasn't order 58372 shipped, and what can we do about it?" \
   "Did the customer already pay?"
 ```
 
@@ -194,9 +194,9 @@ Sydney has stock, and shipping from Sydney adds one day.
 
 ### 4. Deterministic concurrent investigation
 
-```powershell
-go run ./cmd/order-demo workflow `
-  --shipping-endpoint http://127.0.0.1:8081 `
+```bash
+go run ./cmd/order-demo workflow \
+  --shipping-endpoint http://127.0.0.1:8081 \
   --order 58372
 ```
 
@@ -217,10 +217,10 @@ the assembled evidence.
 
 ### 5. Start and pause for approval
 
-```powershell
-go run ./cmd/order-demo resolve `
-  --shipping-endpoint http://127.0.0.1:8081 `
-  --order 58372 `
+```bash
+go run ./cmd/order-demo resolve \
+  --shipping-endpoint http://127.0.0.1:8081 \
+  --order 58372 \
   --state .order-demo/58372
 ```
 
@@ -244,20 +244,20 @@ currency: AUD
 
 Approve:
 
-```powershell
-go run ./cmd/order-demo resume `
-  --state .order-demo/58372 `
-  --approve `
-  --actor operator@example.com `
+```bash
+go run ./cmd/order-demo resume \
+  --state .order-demo/58372 \
+  --approve \
+  --actor operator@example.com \
   --permission order.fulfilment.transfer
 ```
 
 Reject:
 
-```powershell
-go run ./cmd/order-demo resume `
-  --state .order-demo/58372 `
-  --reject `
+```bash
+go run ./cmd/order-demo resume \
+  --state .order-demo/58372 \
+  --reject \
   --actor operator@example.com
 ```
 
@@ -282,8 +282,8 @@ mutation again.
 
 Telemetry is off by default. Enable a pretty-printed stdout exporter:
 
-```powershell
-$env:ORDER_DEMO_TELEMETRY = "stdout"
+```bash
+export ORDER_DEMO_TELEMETRY="stdout"
 go run ./cmd/order-demo workflow --shipping-endpoint http://127.0.0.1:8081
 ```
 
