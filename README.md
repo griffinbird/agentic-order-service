@@ -105,9 +105,9 @@ The domain command prints the typed local records. Tests cover:
 
 Set the Foundry values used by the project Responses API:
 
-```powershell
-$env:FOUNDRY_PROJECT_ENDPOINT = "https://<resource>.services.ai.azure.com/api/projects/<project>"
-$env:FOUNDRY_MODEL = "<model-deployment-name>"
+```bash
+export FOUNDRY_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
+export FOUNDRY_MODEL="<model-deployment-name>"
 ```
 
 Authenticate with any `DefaultAzureCredential` source available in your
@@ -224,10 +224,11 @@ go run ./cmd/order-demo resolve `
   --state .order-demo/58372
 ```
 
-The workflow emits a typed `RequestPort` approval request. The process waits
-until the superstep containing that pending request has a durable filesystem
-checkpoint, writes `.order-demo/58372/run.json`, closes the run and checkpoint
-store, prints exact resume commands, and exits. No mutation has run.
+The workflow imperatively posts a typed request described by a `RequestPort`.
+The process waits until the superstep containing that pending request has a
+durable filesystem checkpoint, writes `.order-demo/58372/run.json`, closes the
+run and checkpoint store, prints exact resume commands, and exits. No mutation
+has run.
 
 Example impact:
 
@@ -312,6 +313,11 @@ not added to workflow span attributes by this sample.
 - The filesystem checkpoint store is process-exclusive and not goroutine-safe.
   One CLI process opens it for one run and closes it before another process
   resumes.
+- The approval executor uses Agent Framework's low-level
+  `NewExternalRequest`/`PostRequest` API rather than `RequestPort.Bind`. At the
+  pinned preview revision, the convenience binding's internal wrapped-request
+  map does not restore correctly from JSON in a new process. The low-level API
+  keeps the same framework-native request/response and checkpoint semantics.
 - The local shipping MCP server is an interoperability demonstration, not a
   carrier integration.
 - The model proposes an action, but the workflow rejects proposals that do not

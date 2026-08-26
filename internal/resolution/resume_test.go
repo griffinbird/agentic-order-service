@@ -3,6 +3,8 @@ package resolution_test
 import (
 	"context"
 	"fmt"
+	"os"
+	"os/exec"
 	"testing"
 
 	"github.com/griffinbird/agentic-order-service/internal/investigation"
@@ -98,6 +100,7 @@ func TestApprovalCheckpointSurvivesCloseAndResume(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if paused.RequestID == "" || paused.Checkpoint.CheckpointID == "" {
 		t.Fatalf("incomplete paused run: %+v", paused)
 	}
@@ -140,6 +143,52 @@ func TestApprovalCheckpointSurvivesCloseAndResume(t *testing.T) {
 	}
 	if repeated.Transfer == nil || !repeated.Transfer.AlreadyApplied {
 		t.Fatalf("repeated resume should return saved idempotent result: %+v", repeated)
+	}
+}
+
+func TestApprovalCheckpointResumesAcrossProcesses(t *testing.T) {
+	stateDir := t.TempDir()
+	runResolutionHelper(t, "start", stateDir)
+	runResolutionHelper(t, "resume", stateDir)
+}
+
+func TestResolutionProcessHelper(t *testing.T) {
+	if os.Getenv("ORDER_DEMO_RESOLUTION_HELPER") != "1" {
+		return
+	}
+	if len(os.Args) != 5 || os.Args[2] != "--" {
+		t.Fatalf("unexpected helper arguments: %q", os.Args)
+	}
+	phase, stateDir := os.Args[3], os.Args[4]
+	switch phase {
+	case "start":
+		if _, err := resolution.Start(
+			context.Background(),
+			newResolutionWorkflow(t, orderdata.NewDeterministicServices()),
+			stateDir,
+			orderdomain.DemoOrderID,
+			nil,
+		); err != nil {
+			t.Fatal(err)
+		}
+	case "resume":
+		result, err := resolution.Resume(
+			context.Background(),
+			newResumeOnlyWorkflow(t, orderdata.NewDeterministicServices(), new(int), new(int)),
+			stateDir,
+			true,
+			"operator@example.com",
+			[]string{orderdomain.TransferPermission},
+			nil,
+		)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if result.Status != "transferred" || result.Transfer == nil {
+			t.Fatalf("unexpected resolution: %+v", result)
+		}
+	default:
+		t.Fatalf("unknown helper phase %q", phase)
 	}
 }
 
@@ -227,4 +276,14 @@ func newResumeOnlyWorkflow(
 		t.Fatal(err)
 	}
 	return wf
+}
+
+func runResolutionHelper(t *testing.T, phase, stateDir string) {
+	t.Helper()
+	command := exec.Command(os.Args[0], "-test.run=^TestResolutionProcessHelper$", "--", phase, stateDir)
+	command.Env = append(os.Environ(), "ORDER_DEMO_RESOLUTION_HELPER=1")
+	output, err := command.CombinedOutput()
+	if err != nil {
+		t.Fatalf("%s helper failed: %v\n%s", phase, err, output)
+	}
 }
