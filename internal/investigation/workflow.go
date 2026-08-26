@@ -118,7 +118,8 @@ func BuildResolutionWorkflow(deps Dependencies) (*workflow.Workflow, error) {
 		ID:       ApprovalPortID,
 		Request:  reflect.TypeFor[ApprovalRequest](),
 		Response: reflect.TypeFor[ApprovalResponse](),
-	}.Bind()
+	}
+	approval := newApprovalBinding(port)
 	transfer := workflow.NewExecutor("TransferFulfilment", func(ctx *workflow.Context, response ApprovalResponse) (ResolutionResult, error) {
 		if !response.Decision.Approved {
 			return ResolutionResult{Status: "rejected"}, nil
@@ -154,13 +155,51 @@ func BuildResolutionWorkflow(deps Dependencies) (*workflow.Workflow, error) {
 		AddFanInBarrierEdge(graph.checks, graph.aggregate).
 		AddEdge(graph.aggregate, graph.reason).
 		AddEdge(graph.reason, prepare).
-		AddEdge(prepare, port).
-		AddEdge(port, transfer).
+		AddEdge(prepare, approval).
+		AddEdge(approval, transfer).
 		WithOutputFrom(transfer)
 	if deps.Tracer != nil {
 		builder.WithTelemetry(deps.Tracer, workflow.TelemetryOptions{EnableSensitiveData: false})
 	}
 	return builder.Build()
+}
+
+func newApprovalBinding(port workflow.RequestPort) workflow.ExecutorBinding {
+	const executorID = "HumanApproval"
+	return workflow.ExecutorBinding{
+		ID:               executorID,
+		ImplementationID: "order-demo.HumanApproval",
+		NewExecutorFunc: func(string) (*workflow.Executor, error) {
+			return &workflow.Executor{
+				ID: executorID,
+				DisableAutoSendMessageHandlerResultObject: true,
+				DisableAutoYieldOutputHandlerResultObject: true,
+				ConfigureProtocol: func(builder *workflow.ProtocolBuilder) (*workflow.ProtocolBuilder, error) {
+					builder.SendsMessageType(reflect.TypeFor[ApprovalResponse]())
+					builder.RouteBuilder.
+						AddHandlerRaw(reflect.TypeFor[ApprovalRequest](), nil, func(ctx *workflow.Context, message any) (any, error) {
+							request, err := workflow.NewExternalRequest("", port, message)
+							if err != nil {
+								return nil, err
+							}
+							return nil, ctx.PostRequest(request)
+						}).
+						AddHandlerRaw(reflect.TypeFor[*workflow.ExternalResponse](), nil, func(ctx *workflow.Context, message any) (any, error) {
+							response := message.(*workflow.ExternalResponse)
+							if response.PortInfo.PortID != port.ID {
+								return nil, fmt.Errorf("unexpected approval response port %q", response.PortInfo.PortID)
+							}
+							value, ok := response.Data.As(port.Response)
+							if !ok {
+								return nil, fmt.Errorf("unexpected approval response type %T", response.Data)
+							}
+							return nil, ctx.SendMessage("", value.(ApprovalResponse))
+						})
+					return builder, nil
+				},
+			}, nil
+		},
+	}
 }
 
 func newGraphBindings(deps Dependencies) graphBindings {

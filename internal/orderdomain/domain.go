@@ -124,7 +124,7 @@ type Recommendation struct {
 	Summary          string            `json:"summary" jsonschema:"A concise evidence-grounded recommendation"`
 	ProposedAction   string            `json:"proposedAction" jsonschema:"The proposed action, or no_action"`
 	Rationale        []string          `json:"rationale" jsonschema:"Short reasons tied only to supplied evidence"`
-	TransferProposal *TransferProposal `json:"transferProposal,omitempty" jsonschema:"Required only when proposing transfer_fulfilment"`
+	TransferProposal *TransferProposal `json:"transferProposal" jsonschema:"Set to null unless proposing transfer_fulfilment"`
 }
 
 func (p TransferProposal) Digest() (string, error) {
