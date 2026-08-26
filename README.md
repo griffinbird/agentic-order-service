@@ -21,31 +21,33 @@ mutations are local demo implementations.
 
 ## Architecture
 
-```text
-Operator
-   |
-   v
-cmd/order-demo
-   |
-   +-- native typed tools ----------------> deterministic Go services
-   |
-   +-- Agent Framework MCP tools --HTTP--> cmd/shipping-mcp (loopback only)
-   |
-   +-- Agent Framework workflow
-          |
-          +-- load order
-          |
-          +-- fan out on Go goroutines
-          |      +-- payment
-          |      +-- inventory
-          |      +-- fulfilment
-          |      `-- shipping through MCP
-          |
-          +-- deterministic fan-in evidence
-          +-- Foundry reasoning
-          +-- typed approval request
-          +-- filesystem checkpoint
-          `-- guarded Go mutation
+```mermaid
+flowchart TD
+    operator["Operator"] --> cli["cmd/order-demo"]
+
+    cli --> native["Native typed tools"]
+    native --> services["Deterministic Go services"]
+
+    cli --> mcpTools["Agent Framework MCP tools"]
+    mcpTools -- "HTTP" --> shippingMCP["cmd/shipping-mcp<br/>(loopback only)"]
+
+    cli --> workflow["Agent Framework workflow"]
+    workflow --> load["Load order"]
+    load --> fanout{"Fan out on Go goroutines"}
+    fanout --> payment["Payment check"]
+    fanout --> inventory["Inventory check"]
+    fanout --> fulfilment["Fulfilment check"]
+    fanout --> shipping["Shipping check"]
+    shipping --> mcpTools
+
+    payment --> fanin["Deterministic fan-in evidence"]
+    inventory --> fanin
+    fulfilment --> fanin
+    shipping --> fanin
+    fanin --> reasoning["Foundry reasoning"]
+    reasoning --> approval["Typed approval request"]
+    approval --> checkpoint["Filesystem checkpoint"]
+    checkpoint --> mutation["Guarded Go mutation"]
 ```
 
 `AddFanOutEdge` expresses independent work. The Agent Framework in-process
