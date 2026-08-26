@@ -1,0 +1,18 @@
+# Build output
+bin/
+*.exe
+*.test
+*.out
+
+# Local demo state
+.order-demo/
+
+# Environment and editor files
+.env
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
