@@ -158,8 +158,9 @@ go run ./cmd/order-demo basic \
 ```
 
 The first stage should acknowledge that the order record alone cannot prove the
-cause. The agent is configured with `DisableStoreOutput: true`; the local
-session owns complete conversational and tool-call history.
+cause. Exact wording varies by model deployment; the factual boundary should
+not. The agent is configured with `DisableStoreOutput: true`; the local session
+owns complete conversational and tool-call history.
 
 ### 3. Add application tools and shipping MCP
 
