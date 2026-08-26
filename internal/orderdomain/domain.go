@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 )
 
@@ -144,12 +145,7 @@ type ApprovalDecision struct {
 }
 
 func (a ApprovalDecision) HasPermission(permission string) bool {
-	for _, candidate := range a.Permissions {
-		if candidate == permission {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(a.Permissions, permission)
 }
 
 type TransferCommand struct {

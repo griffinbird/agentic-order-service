@@ -30,7 +30,6 @@ func TestReadOnlyToolSchemasAndCalls(t *testing.T) {
 		t.Fatalf("got %d tools, want %d", len(tools), len(tests))
 	}
 	for i, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			if tools[i].Name() != tt.name {

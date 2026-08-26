@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 
 	"github.com/griffinbird/agentic-order-service/internal/investigation"
 	"github.com/griffinbird/agentic-order-service/internal/orderdomain"
@@ -244,12 +245,7 @@ func manifestPath(stateDir string) string {
 }
 
 func containsCheckpoint(index []workflow.CheckpointInfo, target workflow.CheckpointInfo) bool {
-	for _, candidate := range index {
-		if candidate == target {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(index, target)
 }
 
 func readManifest(stateDir string) (PausedRun, error) {
