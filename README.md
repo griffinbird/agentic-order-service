@@ -57,8 +57,7 @@ every check to finish before the results are assembled in a predictable order.
 
 This branch-level concurrency works with `inproc.Default`, which is appropriate
 because the CLI starts only one investigation at a time. `inproc.Concurrent`
-serves a different purpose: it allows several complete workflow runs to execute
-at the same time.
+allows several complete workflow runs to execute at the same time.
 
 ## Requirements and pinned preview revision
 
@@ -106,7 +105,7 @@ The domain command prints the typed local records. Tests cover:
 
 ## Live setup
 
-Set the Foundry values used by the project Responses API:
+Set the Azure Foundry values used by the project Responses API:
 
 ```bash
 export FOUNDRY_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
@@ -120,10 +119,9 @@ environment. For local development, Azure CLI authentication is one option:
 az login
 ```
 
-The code does not enumerate resources or choose a subscription. It requests a
-token and calls only the configured project endpoint.
+It requests a token and calls only the configured project endpoint.
 
-Start the controlled shipping server in terminal 1:
+Start the controlled shipping server in terminal:
 
 ```bash
 go run ./cmd/shipping-mcp --listen 127.0.0.1:8081
