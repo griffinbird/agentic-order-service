@@ -50,12 +50,15 @@ flowchart TD
     checkpoint --> mutation["Guarded Go mutation"]
 ```
 
-`AddFanOutEdge` expresses independent work. The Agent Framework in-process
-runner dispatches each activated receiver concurrently using Go goroutines and
-an `errgroup`; `AddFanInBarrierEdge` waits for all four branches before the
-sample assembles evidence in a stable order. The sample uses `inproc.Default`
-because it runs one workflow at a time. `inproc.Concurrent` controls concurrent
-*workflow runs*, not concurrency between branches of one run.
+The workflow fans out into four independent checks: payment, inventory,
+fulfilment, and shipping. `AddFanOutEdge` lets Agent Framework run those
+branches concurrently on Go goroutines. `AddFanInBarrierEdge` then waits for
+every check to finish before the results are assembled in a predictable order.
+
+This branch-level concurrency works with `inproc.Default`, which is appropriate
+because the CLI starts only one investigation at a time. `inproc.Concurrent`
+serves a different purpose: it allows several complete workflow runs to execute
+at the same time.
 
 ## Requirements and pinned preview revision
 
