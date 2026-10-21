@@ -214,8 +214,14 @@ Progress lines make the goroutine-backed branches visible:
 
 Ordering can vary because those checks are concurrent. The final JSON evidence
 is deterministic and is handed to a separate structured-output Foundry
-reasoner. A transfer proposal is accepted only when every field exactly matches
-the assembled evidence.
+reasoner. Before returning a recommendation, the workflow validates its action
+and any transfer proposal against the assembled evidence. A transfer is accepted
+only when its fields match that evidence. A `no_action` recommendation is
+accepted only when it contains no transfer proposal. Unknown actions and
+inconsistent recommendations fail with an explicit error.
+
+The resolution path still requires a validated transfer before requesting
+approval; `no_action` does not enter the approval flow.
 
 ### 5. Start and pause for approval
 
