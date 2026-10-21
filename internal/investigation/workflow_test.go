@@ -2,6 +2,7 @@ package investigation_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http/httptest"
 	"slices"
@@ -18,6 +19,19 @@ import (
 )
 
 type fakeReasoner struct{}
+
+type modifyingReasoner struct {
+	modify func(*orderdomain.Recommendation)
+}
+
+func (r modifyingReasoner) Recommend(ctx context.Context, evidence orderdomain.InvestigationEvidence, stream orderagent.StreamFunc) (orderdomain.Recommendation, error) {
+	recommendation, err := (fakeReasoner{}).Recommend(ctx, evidence, stream)
+	if err != nil {
+		return orderdomain.Recommendation{}, err
+	}
+	r.modify(&recommendation)
+	return recommendation, nil
+}
 
 func (fakeReasoner) Recommend(
 	_ context.Context,
@@ -152,6 +166,81 @@ func TestValidateRecommendationRejectsInventedProposal(t *testing.T) {
 	result.Recommendation.TransferProposal.ToWarehouse = "BNE"
 	if err := investigation.ValidateRecommendation(result); err == nil {
 		t.Fatal("expected invented target warehouse to be rejected")
+	}
+}
+
+func TestInvestigationWorkflowValidatesRecommendations(t *testing.T) {
+	t.Parallel()
+	tests := []struct {
+		name    string
+		modify  func(*orderdomain.Recommendation)
+		wantErr bool
+	}{
+		{"valid transfer", func(*orderdomain.Recommendation) {}, false},
+		{"no action", func(r *orderdomain.Recommendation) {
+			r.ProposedAction = "no_action"
+			r.TransferProposal = nil
+		}, false},
+		{"no action with proposal", func(r *orderdomain.Recommendation) {
+			r.ProposedAction = "no_action"
+		}, true},
+		{"unknown action", func(r *orderdomain.Recommendation) {
+			r.ProposedAction = "cancel_order"
+		}, true},
+		{"empty action", func(r *orderdomain.Recommendation) {
+			r.ProposedAction = ""
+		}, true},
+		{"missing proposal", func(r *orderdomain.Recommendation) {
+			r.TransferProposal = nil
+		}, true},
+		{"wrong cost", func(r *orderdomain.Recommendation) {
+			r.TransferProposal.AdditionalCostCents++
+		}, true},
+		{"wrong warehouse", func(r *orderdomain.Recommendation) {
+			r.TransferProposal.ToWarehouse = "BNE"
+		}, true},
+		{"wrong quantity", func(r *orderdomain.Recommendation) {
+			r.TransferProposal.Quantity++
+		}, true},
+		{"wrong version", func(r *orderdomain.Recommendation) {
+			r.TransferProposal.ExpectedOrderVersion++
+		}, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			wf, err := investigation.BuildInvestigationWorkflow(investigation.Dependencies{
+				Services: orderdata.NewDeterministicServices(),
+				Shipping: newShippingClient(t),
+				Reasoner: modifyingReasoner{modify: tt.modify},
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			result, err := collectInvestigation(context.Background(), wf)
+			if tt.wantErr {
+				if !errors.Is(err, orderdomain.ErrConflict) {
+					t.Fatalf("expected conflict, got result=%+v error=%v", result, err)
+				}
+				if result.Recommendation.ProposedAction != "" {
+					t.Fatalf("invalid recommendation was returned: %+v", result)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			if tt.name == "no action" {
+				if result.Recommendation.ProposedAction != "no_action" || result.Recommendation.TransferProposal != nil {
+					t.Fatalf("unexpected no_action result: %+v", result)
+				}
+				if err := investigation.ValidateRecommendation(result); !errors.Is(err, orderdomain.ErrConflict) {
+					t.Fatalf("approval guard must still reject no_action: %v", err)
+				}
+			} else if result.Recommendation.ProposedAction != "transfer_fulfilment" {
+				t.Fatalf("unexpected transfer result: %+v", result)
+			}
+		})
 	}
 }
 

@@ -269,7 +269,20 @@ func newGraphBindings(deps Dependencies) graphBindings {
 		if err != nil {
 			return InvestigationResult{}, fmt.Errorf("reason over evidence: %w", err)
 		}
-		return InvestigationResult{Evidence: evidence, Recommendation: recommendation}, nil
+		result := InvestigationResult{Evidence: evidence, Recommendation: recommendation}
+		switch recommendation.ProposedAction {
+		case "no_action":
+			if recommendation.TransferProposal != nil {
+				return InvestigationResult{}, fmt.Errorf("%w: no_action recommendation contains a transfer proposal", orderdomain.ErrConflict)
+			}
+		case "transfer_fulfilment":
+			if err := ValidateRecommendation(result); err != nil {
+				return InvestigationResult{}, fmt.Errorf("validate recommendation: %w", err)
+			}
+		default:
+			return InvestigationResult{}, fmt.Errorf("%w: unsupported recommended action %q", orderdomain.ErrConflict, recommendation.ProposedAction)
+		}
+		return result, nil
 	}).Bind()
 	return graphBindings{
 		load: load,
