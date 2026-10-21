@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="245" viewBox="0 0 960 245" role="img" aria-labelledby="title desc">
+  <title id="title">ENHANCE THE APPLICATION YOU ALREADY HAVE</title><desc id="desc">An operator asks an agent a question. The agent accesses existing Go functions through tools; business rules remain in the Go service.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="245" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">ENHANCE THE APPLICATION YOU ALREADY HAVE</text>
+  <rect x="36" y="91" width="230" height="90" rx="14" fill="#fff5df" stroke="#e8bc64" stroke-width="1.5"/>
+    <text x="151" y="127" text-anchor="middle" font-size="22" fill="#79520c" font-weight="600">Operator</text>
+    <text x="151" y="154" text-anchor="middle" font-size="17" fill="#79520c" font-weight="400">Asks a question</text><path d="M278,136 L348,136" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="360" y="91" width="230" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="475" y="127" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Agent</text>
+    <text x="475" y="154" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Selects useful tools</text><path d="M602,136 L672,136" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="684" y="91" width="240" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="804" y="127" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Existing Go service</text>
+    <text x="804" y="154" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Typed functions + rules</text>
+  <text x="480" y="220" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Add a reasoning layer, not a replacement for your application.</text>
+  </g></svg>

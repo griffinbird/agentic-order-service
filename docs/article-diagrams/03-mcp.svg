@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="365" viewBox="0 0 960 365" role="img" aria-labelledby="title desc">
+  <title id="title">ADD A CAPABILITY OWNED BY ANOTHER SYSTEM</title><desc id="desc">The agent uses native function tools for the existing Go service and MCP tools for an external shipping provider.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="365" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">ADD A CAPABILITY OWNED BY ANOTHER SYSTEM</text>
+  <rect x="345" y="77" width="270" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="480" y="113" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Agent</text>
+    <text x="480" y="140" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Uses both kinds of tool</text><path d="M480 167 V191 H249 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><path d="M480 167 V191 H711 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><text x="249" y="180" text-anchor="middle" font-size="16" fill="#52657d" font-weight="400">Native function tools</text><text x="711" y="180" text-anchor="middle" font-size="16" fill="#20645a" font-weight="600">MCP tools</text><rect x="60" y="220" width="378" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="249" y="256" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Existing Go service</text>
+    <text x="249" y="283" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Orders, payments, inventory, fulfilment</text><rect x="522" y="220" width="378" height="90" rx="14" fill="#edf8f7" stroke="#85c6bc" stroke-width="1.5"/>
+    <text x="711" y="256" text-anchor="middle" font-size="22" fill="#20645a" font-weight="600">Shipping provider</text>
+    <text x="711" y="283" text-anchor="middle" font-size="17" fill="#20645a" font-weight="400">External MCP server</text>
+  <text x="480" y="340" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Same agent. A new integration boundary.</text>
+  </g></svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="445" viewBox="0 0 960 445" role="img" aria-labelledby="title desc">
+  <title id="title">RUN KNOWN CHECKS, THEN ASK THE AGENT TO INTERPRET</title><desc id="desc">A workflow loads the order and runs payment, inventory, fulfilment, and shipping checks concurrently. It combines the evidence before agent reasoning.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="445" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">RUN KNOWN CHECKS, THEN ASK THE AGENT TO INTERPRET</text>
+  <rect x="36" y="156" width="184" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="128" y="192" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Load order</text>
+    <text x="128" y="219" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go operation</text><path d="M230,201 L272,201" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="284" y="76" width="316" height="285" rx="16" fill="#f8fafc" stroke="#cbd5e1"/><text x="442" y="109" text-anchor="middle" font-size="20" fill="#172b43" font-weight="600">Concurrent checks</text><rect x="302" y="129" width="280" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="442" y="165" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Payment + inventory</text>
+    <text x="442" y="192" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Independent Go checks</text><rect x="302" y="236" width="280" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="442" y="272" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Fulfilment + shipping</text>
+    <text x="442" y="299" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go + MCP checks</text><path d="M610,201 L728,201" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="740" y="156" width="184" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="832" y="192" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Agent</text>
+    <text x="832" y="219" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Interprets evidence</text><text x="669" y="224" text-anchor="middle" font-size="15" fill="#52657d" font-weight="400">Combined</text><text x="669" y="245" text-anchor="middle" font-size="15" fill="#52657d" font-weight="400">results</text>
+  <text x="480" y="420" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">The workflow controls execution. The agent recommends an action.</text>
+  </g></svg>

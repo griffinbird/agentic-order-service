@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="280" viewBox="0 0 960 280" role="img" aria-labelledby="title desc">
+  <title id="title">THE APPROVAL WAIT CAN OUTLIVE THE PROCESS</title><desc id="desc">Save a checkpoint at the approval boundary. The process may stop. Later, restore the checkpoint, receive the approval decision, and continue only if approved.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="280" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">THE APPROVAL WAIT CAN OUTLIVE THE PROCESS</text>
+  <rect x="36" y="100" width="260" height="90" rx="14" fill="#fff5df" stroke="#e8bc64" stroke-width="1.5"/>
+    <text x="166" y="136" text-anchor="middle" font-size="22" fill="#79520c" font-weight="600">Pause + save</text>
+    <text x="166" y="163" text-anchor="middle" font-size="17" fill="#79520c" font-weight="400">Waiting for approval</text><path d="M308,145 L354,145" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="366" y="100" width="228" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="480" y="136" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Time passes</text>
+    <text x="480" y="163" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Process may stop</text><path d="M606,145 L652,145" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="664" y="100" width="260" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="794" y="136" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Restore + resume</text>
+    <text x="794" y="163" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Handle approval decision</text>
+  <text x="480" y="255" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Resume from saved state. Execute only an approved action.</text>
+  </g></svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="355" viewBox="0 0 960 355" role="img" aria-labelledby="title desc">
+  <title id="title">RECOMMEND FIRST. CHANGE STATE ONLY AFTER APPROVAL.</title><desc id="desc">The agent proposes an action. A person approves or rejects it. Only an approved action reaches a validated Go operation.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="355" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">RECOMMEND FIRST. CHANGE STATE ONLY AFTER APPROVAL.</text>
+  <rect x="36" y="85" width="245" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="158.5" y="121" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Proposed action</text>
+    <text x="158.5" y="148" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Prepared by the agent</text><path d="M291,130 L345,130" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="357" y="85" width="245" height="90" rx="14" fill="#fff5df" stroke="#e8bc64" stroke-width="1.5"/>
+    <text x="479.5" y="121" text-anchor="middle" font-size="22" fill="#79520c" font-weight="600">Human approval</text>
+    <text x="479.5" y="148" text-anchor="middle" font-size="17" fill="#79520c" font-weight="400">Review impact</text><path d="M614,130 L668,130" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="641" y="119" text-anchor="middle" font-size="16" fill="#52657d" font-weight="400">Approve</text><rect x="680" y="85" width="244" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="802" y="121" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Go operation</text>
+    <text x="802" y="148" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Validate + apply change</text><path d="M480,187 L480,225" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="437" y="211" text-anchor="middle" font-size="16" fill="#52657d" font-weight="400">Reject</text><rect x="357" y="237" width="245" height="62" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="479.5" y="273" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">No change</text>
+    
+  <text x="480" y="330" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Approval is an extra control. Go still enforces business rules.</text>
+  </g></svg>

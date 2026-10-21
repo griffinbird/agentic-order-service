@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="575" viewBox="0 0 960 575" role="img" aria-labelledby="title desc">
+  <title id="title">THE COMPLETE FLOW, WITH THE SAME GO FOUNDATION</title><desc id="desc">An operator requests an investigation. A workflow gathers evidence from existing Go services and shipping through MCP. The agent proposes an action, a person approves it, and Go validates and applies the change. Checkpoints and traces support the flow.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="575" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">THE COMPLETE FLOW, WITH THE SAME GO FOUNDATION</text>
+  <rect x="36" y="81" width="245" height="90" rx="14" fill="#fff5df" stroke="#e8bc64" stroke-width="1.5"/>
+    <text x="158.5" y="117" text-anchor="middle" font-size="22" fill="#79520c" font-weight="600">Operator</text>
+    <text x="158.5" y="144" text-anchor="middle" font-size="17" fill="#79520c" font-weight="400">Requests investigation</text><path d="M293,126 L345,126" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="357" y="81" width="245" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="479.5" y="117" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Workflow</text>
+    <text x="479.5" y="144" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Gathers evidence</text><path d="M614,126 L666,126" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="678" y="81" width="246" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="801" y="117" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Agent</text>
+    <text x="801" y="144" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Proposes an action</text><path d="M480 171 V204" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><rect x="322" y="216" width="316" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="480" y="252" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Existing capabilities</text>
+    <text x="480" y="279" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go services + shipping via MCP</text><path d="M801 171 V385 H642" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><rect x="385" y="340" width="245" height="90" rx="14" fill="#fff5df" stroke="#e8bc64" stroke-width="1.5"/>
+    <text x="507.5" y="376" text-anchor="middle" font-size="22" fill="#79520c" font-weight="600">Human approval</text>
+    <text x="507.5" y="403" text-anchor="middle" font-size="17" fill="#79520c" font-weight="400">Approve or reject</text><path d="M373,385 L277,385" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="325" y="359" text-anchor="middle" font-size="16" fill="#52657d" font-weight="400">Approve</text><rect x="20" y="340" width="245" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="142.5" y="376" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Go operation</text>
+    <text x="142.5" y="403" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Validate + apply change</text><rect x="36" y="478" width="888" height="42" rx="10" fill="#f1f5f9"/><text x="480" y="505" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Supporting the flow: checkpoints + OpenTelemetry</text>
+  <text x="480" y="550" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">Business logic, authorization, and state changes remain in Go.</text>
+  </g></svg>

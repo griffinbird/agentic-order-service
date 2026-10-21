@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="365" viewBox="0 0 960 365" role="img" aria-labelledby="title desc">
+  <title id="title">GIVE THE AGENT USEFUL CAPABILITIES</title><desc id="desc">The agent selects from orders, payments, inventory, and fulfilment tools. Each tool calls existing Go code.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="#71839a" stroke-width="1.5"/></marker></defs>
+  <rect width="960" height="365" rx="20" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, sans-serif">
+  <text x="36" y="43" text-anchor="start" font-size="17" fill="#52657d" font-weight="600">GIVE THE AGENT USEFUL CAPABILITIES</text>
+  <rect x="345" y="77" width="270" height="90" rx="14" fill="#eaf3ff" stroke="#93baf0" stroke-width="1.5"/>
+    <text x="480" y="113" text-anchor="middle" font-size="22" fill="#174a8b" font-weight="600">Agent</text>
+    <text x="480" y="140" text-anchor="middle" font-size="17" fill="#174a8b" font-weight="400">Chooses what to check</text><path d="M480 167 V190 H141 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><path d="M480 167 V190 H367 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><path d="M480 167 V190 H593 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><path d="M480 167 V190 H819 V215" fill="none" stroke="#71839a" stroke-width="2" marker-end="url(#arrow)"/><rect x="36" y="220" width="210" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="141" y="256" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Orders</text>
+    <text x="141" y="283" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go function</text><rect x="262" y="220" width="210" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="367" y="256" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Payments</text>
+    <text x="367" y="283" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go function</text><rect x="488" y="220" width="210" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="593" y="256" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Inventory</text>
+    <text x="593" y="283" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go function</text><rect x="714" y="220" width="210" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="819" y="256" text-anchor="middle" font-size="22" fill="#334155" font-weight="600">Fulfilment</text>
+    <text x="819" y="283" text-anchor="middle" font-size="17" fill="#334155" font-weight="400">Go function</text>
+  <text x="480" y="340" text-anchor="middle" font-size="18" fill="#52657d" font-weight="400">The question determines which tools the agent needs.</text>
+  </g></svg>
